@@ -19,13 +19,6 @@ The ultimate motivation behind BeatNet is to further develop AI integration in m
 # Planned Deliverables Sebastian
 Our primary deliverable will be a Python package that trains a machine learning model for predicting DJ transition compatibility between two songs. The package will include all code for data processing, feature extraction (via the Spotify API), model training, and evaluation, along with clear documentation. Additionally, we will provide at least one Jupyter Notebook demonstrating how to use the package, including exploratory analysis and evaluation of model performance.
 
-# Resources Required
-Our target data comes from the DJ Mix Dataset, https://github.com/mir-aidj/djmix-dataset, which provides tracklists of existing DJ mixes. Once we have cleaned the dataset, this source will provide the pairings of songs that have been directly mixed together (pairs of songs where there is a transition from Song 1 -> Song 2). 
-
-Our feature data will come from the Spotify API, which contains songs and their musical features. The final format of our dataset will be rows containing the features of pairings of two songs, along with a single binary label according to whether or not this pairing was found in the DJ Mix Dataset. Negative labels will be generated from random pairs of songs: either songs that were not paired in the DJ Mix Dataset, or randomly generated pairings from the Spotify API.
-
-Concatenating these two datasets will present a couple challenges. First, in order to match Spotify API features with the DJ Mix pairings, we need to have an efficient method of matching song titles. Second, we will have to explore the different two methods of choosing negatively labelled song pairings.
-
 ## Partial Success:
 At minimum, we will produce a working classifier that takes two songs as input and outputs a binary prediction indicating whether they are compatible for a DJ transition. This will be accompanied by a Jupyter Notebook showcasing the full pipeline, including training, evaluation on a train-test split, and analysis of model accuracy. We will also include qualitative evaluation, such as testing the model on DJ mixes not present in the dataset and incorporating subjective assessments of transition quality. 
 
@@ -33,6 +26,11 @@ At minimum, we will produce a working classifier that takes two songs as input a
 If successful, we will expand the dataset by incorporating additional DJ mix data through web scraping from platforms such as SoundCloud, and 1001Tracklists. We may also explore more advanced approaches, such as using embeddings to model, or even create,  transitions. In this scenario, the system could evolve beyond binary classification to include a recommendation component that suggests compatible songs given a single input track, moving closer to a fully automated DJ mixing assistant. We are also considering including some sort of compatibility scoring, to rank the quality of the compatibility between two songs, which would help with the recommendation system. This might potentially turn the problem into a linear regression model to predict those scores. 
 
 # Resources Required
+Our target data comes from the DJ Mix Dataset, https://github.com/mir-aidj/djmix-dataset, which provides tracklists of existing DJ mixes. Once we have cleaned the dataset, this source will provide the pairings of songs that have been directly mixed together (pairs of songs where there is a transition from Song 1 -> Song 2). 
+
+Our feature data will come from the Spotify API, which contains songs and their musical features. The final format of our dataset will be rows containing the features of pairings of two songs, along with a single binary label according to whether or not this pairing was found in the DJ Mix Dataset. Negative labels will be generated from random pairs of songs: either songs that were not paired in the DJ Mix Dataset, or randomly generated pairings from the Spotify API.
+
+Concatenating these two datasets will present a couple challenges. First, in order to match Spotify API features with the DJ Mix pairings, we need to have an efficient method of matching song titles. Second, we will have to explore the different two methods of choosing negatively labelled song pairings.
 
 # What You Will Learn
 I, Sebastian, aim to strengthen my skills in data wrangling, feature extraction, and implementation, tuning, and evaluation of machine learning models for specific applications. I am also excited to work with the Spotify API and further develop my ability to analyze and manipulate music data in a programming context.
