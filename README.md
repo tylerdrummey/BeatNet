@@ -10,7 +10,7 @@ We will evaluate our model using a balanced dataset of compatible and non-compat
 
 # Motivation and Questions
 
-This project will explore machine learning’s capability to understand music and classify musical relationships between songs. The Spotify API provides the necessary features for describing songs. The DJ Mix Dataset provides access to training data regarding relationships between songs, (further data about which could be collected using webscrapers on soundcloud or 1001tracklists.com). Together these datasets will serve as training data in an algorithm that identifies compatible songs based on their features.
+This project will explore a classification model's capacity to understand and classify musical relationships between songs. The Spotify API provides the necessary features for describing songs. The DJ Mix Dataset provides access to training data regarding relationships between songs (further data about which could be collected using webscrapers on soundcloud or 1001tracklists.com). Together these datasets will serve as training data in an algorithm that identifies compatible songs based on their features.
 
 Inspiration for BeatNet came from listening to DJ mixes. This experience lends well to testing our model: we have both a subjective intuition regarding song compatibility, as well as an array of DJ mixes not in the training set that can be used to evaluate the model’s performance.
 
@@ -30,7 +30,7 @@ Our target data comes from the DJ Mix Dataset, https://github.com/mir-aidj/djmix
 
 Our feature data will come from the Spotify API, which contains songs and their musical features. The final format of our dataset will be rows containing the features of pairings of two songs, along with a single binary label according to whether or not this pairing was found in the DJ Mix Dataset. Negative labels will be generated from random pairs of songs: either songs that were not paired in the DJ Mix Dataset, or randomly generated pairings from the Spotify API.
 
-Concatenating these two datasets will present a couple challenges. First, in order to match Spotify API features with the DJ Mix pairings, we need to have an efficient method of matching song titles. Second, we will have to explore the different two methods of choosing negatively labelled song pairings.
+Concatenating these two datasets will present a couple of challenges. First, in order to match Spotify API features with the DJ Mix pairings, we need to have an efficient method of matching song titles. Second, we will have to explore the different two methods of choosing negatively labelled song pairings.
 
 # What You Will Learn
 I, Sebastian, aim to strengthen my skills in data wrangling, feature extraction, and implementation, tuning, and evaluation of machine learning models for specific applications. I am also excited to work with the Spotify API and further develop my ability to analyze and manipulate music data in a programming context.
