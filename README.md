@@ -46,11 +46,16 @@ Additional risks include limitations in the dataset itself. The data is several 
 
 # Ethics Statement
 Our binary classifier could help DJs, artists, and music listeners to identify songs for their mixes or listening sessions. Automated DJ systems help to more efficiently produce longer, more engaging song mixups. This alternative to listening to individual songs could improve listening retention and positively change the way we listen to music. DJ mixes can also make new music more accessible to people with a fixed music taste.
+
 The aforementioned benefits DJ mixes could help spread the popularity of less well-known artists if their songs are mixable with more popular playlists.
+
 Our classifier also has the potential to make music production easier for DJs and Artists. If we extend the project to recommend music, a casual listener could use the program for finding songs that work well together in a playlist. DJ mixes present a new way to listen to music, which has the potential to benefit anyone who enjoys listening to music.
 Niche genres of music may be labeled as not compatible with other songs in DJ mixes. This bias is a result of there being less existing DJ mixes containing these types of songs. This could negatively impact lesser-known artists or those who listen to nontraditional genres of music.
+
 The opposite issue may also occur: our model may be biased towards identifying popular songs that appear in many DJ mixes as always compatible for DJ mixes.
+
 We hope that our model will make the world a better place by developing the space of DJ music recommendations. However, our model makes several key assumptions. First, we assume that song compatibility is predictable based on features of the individual songs. We assume two songs having been mixed is a close approximation to the true target of two songs being mixable. Finally, we assume that a model identifying mixable songs will assist DJs, artists, and listeners in creating mixes, and that the world is a better place when those mixes are generated more efficiently.
+
 As mentioned before, song popularity in the DJ Mix Dataset may impact how the model assesses its compatibility with new songs.
 The dataset contains a limited number of DJ mixes, meaning that culture and genre representation will be biased, and the model is likely to promote the tastes of select DJs.
 
