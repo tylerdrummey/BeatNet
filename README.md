@@ -50,9 +50,9 @@ We plan to structure our work to ensure a functional prototype early, followed b
 
 
 ## First Two Weeks:
-    We will develop the data acquisition pipeline, including integrating the DJ mix dataset with Spotify API features. By the end of this phase, we aim to have a clean, usable dataset and complete initial exploratory data analysis. 
+We will develop the data acquisition pipeline, including integrating the DJ mix dataset with Spotify API features. By the end of this phase, we aim to have a clean, usable dataset and complete initial exploratory data analysis. 
 
 ## Final Two Weeks:
-    We will implement the binary classification model to predict song compatibility, along with thorough performance evaluation using a train-test split. If time permits, we will explore the extensions we have discussed, such as developing a recommendation component, an AI mixing functionality, or a way to quantify compatibility beyond binary classification. 
+We will implement the binary classification model to predict song compatibility, along with thorough performance evaluation using a train-test split. If time permits, we will explore the extensions we have discussed, such as developing a recommendation component, an AI mixing functionality, or a way to quantify compatibility beyond binary classification. 
 
 
