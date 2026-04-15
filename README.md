@@ -16,7 +16,7 @@ Inspiration for BeatNet came from listening to DJ mixes. This experience lends w
 
 The ultimate motivation behind BeatNet is to further develop AI integration in music generation and recommendation, specifically in the space of AI DJ transition models. AI DJs have the ability to improve listening retention, introduce new music to users, and revolutionize the way we listen to music. Hopefully our model will inform AI DJs and DJs alike in choosing which songs to mix together.
 
-# Planned Deliverables Sebastian
+# Planned Deliverables
 Our primary deliverable will be a Python package that trains a machine learning model for predicting DJ transition compatibility between two songs. The package will include all code for data processing, feature extraction (via the Spotify API), model training, and evaluation, along with clear documentation. Additionally, we will provide at least one Jupyter Notebook demonstrating how to use the package, including exploratory analysis and evaluation of model performance.
 
 ## Partial Success:
