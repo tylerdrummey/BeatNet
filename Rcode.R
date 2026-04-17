@@ -31,11 +31,13 @@ pairs <- pairs %>%
 audio_data = read.csv("SpotifyAudioFeaturesApril2019.csv")|>
   select(-track_id)
 
+audio_data = audio_data[1:10000,]
 
 clean <- function(x) {
   x %>%
-    str_to_lower() %>%
-    str_replace_all("\\[.*?\\]", "") %>%
+    tolower() %>%
+    str_remove_all("\\[.*?\\]") %>%
+    str_remove_all("\\(.*?\\)") %>%
     str_replace_all("[^a-z0-9 ]", " ") %>%
     str_squish()
 }
@@ -51,16 +53,19 @@ audio_data <- audio_data %>%
     audio_key = clean(paste(artist_name, track_name))
   )
 
-pairs_full <- pairs %>%
-  left_join(
-    audio_data,
-    by = c("artist_name1" = "artist_name",
-           "track_name1"  = "track_name")
-  )|>
-  filter(!is.na(key))
+pairs_full <- stringdist_left_join(
+  pairs,
+  audio_data,
+  by = c("artist_track_1" = "audio_key"),
+  method = "jw",        # Jaro-Winkler (good for names)
+  max_dist = 0.15,      
+  distance_col = "dist1"
+)|>
+  filter(!is.na(key)) #only leave rows that matched
+  
   
   
 
 
-#write.csv(df, "pairs.csv", row.names = FALSE)
+write.csv(pairs, "pairs.csv", row.names = FALSE)
 
