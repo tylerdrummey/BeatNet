@@ -80,10 +80,9 @@ def pairwise_transform_features(df):
 
 
 #TRAIN FUNCTION
-def train_model(lr=0.01, epochs=1000, shuffle = True, tol = 1e-7, graph =True):
+def train_model(data, lr=0.01, epochs=1000, shuffle = True, tol = 1e-7, graph =True):
     #read in data
-    data = pd.read_csv("final_pairs.csv").drop(columns=["Unnamed: 0"], errors="ignore")
-
+    
     #start pipeline
 
 
