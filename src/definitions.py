@@ -1,37 +1,52 @@
+# torch.manual_seed(48) #For training consistency
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import pandas as pd
+import pickle
+import torch
 
-torch.manual_seed(48) #For training consistency
+
 class DataPrepPipeline:
     """
     Data Preparation pipeline for the compatibility model.
     """
     def __init__(self):
-      pass
+        self.mean = None
+        self.std = None
+
+    def fit(self, X):
+        X = X.drop(["s1", "s2"], axis=1)
+        X = pairwise_transform_features(X)
+        X = X.astype(float)
+
+        self.mean = X.mean()
+        self.std = X.std() + 1e-8
 
     def transform(self, X):
-      #drop target features
-      X = X.drop(["s1", "s2"], axis=1)
+        #Drop song names
+        X = X.drop(["s1", "s2"], axis=1)
+        #Apply pairwise features
+        X = pairwise_transform_features(X)
+        #Convert to float
+        X = X.astype(float)
 
-      #Apply Pairwise features
-      X = pairwise_transform_features(X)
+        #Unused for now, will explore more in the future
+        # # normalize using training stats
+        # X = (X - self.mean) / self.std
 
-      #Convert to float
-      X = X.astype(float)
-
-      # Convert to tensors
-      X_train = torch.tensor(X.values, dtype=torch.float32)
-
-      #Optional Apply kernels
-
-      return X_train
+        #Convert to tensor
+        X_tensor = torch.tensor(X.values, dtype=torch.float32)
+        return X_tensor
 
 class CompatibilityModel(torch.nn.Module):
     #Simple binary classifcation model
     def __init__(self, d_features):
         super().__init__()
-        self.W = torch.nn.Parameter(torch.randn(d_features, 1) * 0.01)
+        self.W = torch.nn.Parameter(torch.ones(d_features, 1) * 0.01)
+        self.b = torch.nn.Parameter(torch.zeros(1)) #bias term
 
     def forward(self, X):
-        return X @ self.W
+        return X @ self.W + self.b
 
 
 
@@ -46,8 +61,8 @@ def pairwise_transform_features(df):
     """
 
     df = df.copy()
-    
-    # Find shared base feature names (without _1 / _2 / metadata)
+
+    # Find shared base feature names (without _1  _2  metadata)
     base_features = sorted({
         col[:-2] for col in df.columns
         if col.endswith("_1") and col[:-2] + "_2" in df.columns and col[:-2] #not in skip_cols
@@ -65,15 +80,17 @@ def pairwise_transform_features(df):
 
 
 #TRAIN FUNCTION
-def train_model(lr=0.01, epochs=1000, track = True, shuffle = True, tol = 1e-7, graph =True, reg = 0.1):
+def train_model(lr=0.01, epochs=1000, shuffle = True, tol = 1e-7, graph =True):
     #read in data
     data = pd.read_csv("final_pairs.csv").drop(columns=["Unnamed: 0"], errors="ignore")
 
     #start pipeline
-    pipeline = DataPrepPipeline()
+
 
     #Split data
     train_df, val_df = train_test_split(data, test_size=0.3,random_state=48,stratify=data["compatible"], shuffle = shuffle)
+    pipeline = DataPrepPipeline()
+    pipeline.fit(train_df.drop(columns=["compatible"]))
 
 
     # TRAIN DATA
@@ -104,14 +121,14 @@ def train_model(lr=0.01, epochs=1000, track = True, shuffle = True, tol = 1e-7, 
         loss = loss_fn(logits, y_train)
         train_losses.append(loss.item())
         #validation loss
-        with torch.no_grad(): 
+        with torch.no_grad():
           val_logits = model(X_val)
           val_loss = loss_fn(val_logits, y_val)
           val_losses.append(val_loss.item())
-        #Saving best model on validation loss  
+
+        #Saving best model on validation loss
         if val_loss < min_loss:
           min_loss = val_loss
-          print(val_loss)
           with open("model.pkl", "wb") as f:
             pickle.dump(model, f)
 
@@ -128,14 +145,14 @@ def train_model(lr=0.01, epochs=1000, track = True, shuffle = True, tol = 1e-7, 
                 print(f"Converged at epoch {epoch}")
                 break
 
-
+    print("Min validation loss", min_loss)
   #Graphing
     if graph:
         graphLosses(train_losses, val_losses)
         # print("\nTraining Loss:", train_losses[-1])
         # print("Validation Loss:", val_losses[-1])
 
-    #return model and validation data 
+    #return model and validation data
     return model, X_val, y_val
 
 #Graphing function
@@ -165,3 +182,5 @@ def confusion_matrix(y_true, y_pred, n_classes=2):
         cm[t, p] += 1
 
     return cm
+
+#-------------- everthing aboved was copied into src python code
