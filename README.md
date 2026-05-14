@@ -32,6 +32,16 @@ Our feature data will come from the Spotify API, which contains songs and their 
 
 Concatenating these two datasets will present a couple of challenges. First, in order to match Spotify API features with the DJ Mix pairings, we need to have an efficient method of matching song titles. Second, we will have to explore the different two methods of choosing negatively labelled song pairings.
 
+Required imports include:
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import pickle
+import torch
+import sys
+import os
+
 # What You Will Learn
 I, Sebastian, aim to strengthen my skills in data wrangling, feature extraction, and implementation, tuning, and evaluation of machine learning models for specific applications. I am also excited to work with the Spotify API and further develop my ability to analyze and manipulate music data in a programming context.
 
